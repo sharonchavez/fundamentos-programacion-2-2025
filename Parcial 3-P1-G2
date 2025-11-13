@@ -1,44 +1,91 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
-string unidades[] = {"", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"};
-string especiales[] = {"diez","once","doce","trece","catorce","quince","dieciseis","diecisiete","dieciocho","diecinueve"};
-string decenas[] = {"","diez","veinte","treinta","cuarenta","cincuenta","sesenta","setenta","ochenta","noventa"};
-string centenas[] = {"","cien","ciento","doscientos","trescientos","cuatrocientos","quinientos","seiscientos","setecientos","ochocientos","novecientos"};
-
-string convertirNumero(int n) {
-    if(n == 0) return "cero";
-    
-    int c = n / 100;
-    int d = (n / 10) % 10;
-    int u = n % 10;
-    string texto = "";
-
-    if(c > 0) {
-        if(n == 100) return "cien";
-        texto += centenas[c] + " ";
-    }
-
-    if(d == 1) texto += especiales[u];
-    else {
-        texto += decenas[d];
-        if(u > 0 && d > 1) texto += " y ";
-        if(d != 1) texto += unidades[u];
-    }
-    return texto;
-}
-
 int main() {
-    int N;
-    cout << "Ingrese un numero positivo (max 999): ";
-    cin >> N;
+    int n, centenas, decenas, unidades;
 
-    if(N <= 0 || N >= 1000){
-        cout << "ERROR: Debe ingresar un numero entre 1 y 999.\n";
+    cout << "Ingrese un numero entre 1 y 999: ";
+    cin >> n;
+
+    if (n <= 0 || n > 999) {
+        cout << "Numero fuera de rango." << endl;
         return 0;
     }
 
-    cout << "Literal: " << convertirNumero(N) << endl;
+    // Separar dígitos
+    centenas = n / 100;
+    decenas = (n / 10) % 10;
+    unidades = n % 10;
+
+    cout << "El numero " << n << " en literal es: ";
+
+    // Centenas
+    if (centenas == 1 && decenas == 0 && unidades == 0) cout << "cien ";
+    else if (centenas == 1) cout << "ciento ";
+    else if (centenas == 2) cout << "doscientos ";
+    else if (centenas == 3) cout << "trescientos ";
+    else if (centenas == 4) cout << "cuatrocientos ";
+    else if (centenas == 5) cout << "quinientos ";
+    else if (centenas == 6) cout << "seiscientos ";
+    else if (centenas == 7) cout << "setecientos ";
+    else if (centenas == 8) cout << "ochocientos ";
+    else if (centenas == 9) cout << "novecientos ";
+
+    // Decenas y unidades
+    if (decenas == 1) {
+        if (unidades == 0) cout << "diez";
+        else if (unidades == 1) cout << "once";
+        else if (unidades == 2) cout << "doce";
+        else if (unidades == 3) cout << "trece";
+        else if (unidades == 4) cout << "catorce";
+        else if (unidades == 5) cout << "quince";
+        else cout << "dieci" << unidades;
+    } 
+    else if (decenas == 2) {
+        if (unidades == 0) cout << "veinte";
+        else cout << "veinti" << unidades;
+    } 
+    else if (decenas == 3) {
+        cout << "treinta";
+        if (unidades > 0) cout << " y " << unidades;
+    } 
+    else if (decenas == 4) {
+        cout << "cuarenta";
+        if (unidades > 0) cout << " y " << unidades;
+    } 
+    else if (decenas == 5) {
+        cout << "cincuenta";
+        if (unidades > 0) cout << " y " << unidades;
+    } 
+    else if (decenas == 6) {
+        cout << "sesenta";
+        if (unidades > 0) cout << " y " << unidades;
+    } 
+    else if (decenas == 7) {
+        cout << "setenta";
+        if (unidades > 0) cout << " y " << unidades;
+    } 
+    else if (decenas == 8) {
+        cout << "ochenta";
+        if (unidades > 0) cout << " y " << unidades;
+    } 
+    else if (decenas == 9) {
+        cout << "noventa";
+        if (unidades > 0) cout << " y " << unidades;
+    } 
+    else if (decenas == 0 && unidades > 0) {
+        // Solo unidades (1-9)
+        if (unidades == 1) cout << "uno";
+        else if (unidades == 2) cout << "dos";
+        else if (unidades == 3) cout << "tres";
+        else if (unidades == 4) cout << "cuatro";
+        else if (unidades == 5) cout << "cinco";
+        else if (unidades == 6) cout << "seis";
+        else if (unidades == 7) cout << "siete";
+        else if (unidades == 8) cout << "ocho";
+        else if (unidades == 9) cout << "nueve";
+    }
+
+    cout << endl;
     return 0;
 }
