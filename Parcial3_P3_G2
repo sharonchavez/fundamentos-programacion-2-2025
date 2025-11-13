@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+double factorial(int n){
+    double f = 1;
+    for(int i = 1; i <= n; i++) f *= i;
+    return f;
+}
+
+double potencia(double base, int exp){
+    double p = 1;
+    for(int i = 1; i <= exp; i++) p *= base;
+    return p;
+}
+
+double calcularSerie(int B, int N) {
+    double suma = 0;
+    for(int k = 1; k <= N; k++) {
+        int denom = 3 * k;
+        suma += potencia(B, k) / factorial(denom);
+    }
+    return suma;
+}
+
+int main() {
+    int B, N;
+
+    cout << "Ingrese B (positivo): ";
+    cin >> B;
+    cout << "Ingrese N (>1): ";
+    cin >> N;
+
+    if(B <= 0 || N <= 1) {
+        cout << "ERROR: B debe ser positivo y N > 1.\n";
+        return 0;
+    }
+
+    double resultado = calcularSerie(B, N);
+
+    cout << fixed << setprecision(4);
+    cout << "Resultado de la serie = " << resultado << endl;
+
+    return 0;
+}
