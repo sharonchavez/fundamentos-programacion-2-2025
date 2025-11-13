@@ -1,0 +1,53 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+// Función para calcular factorial
+double factorial(int n) {
+    double f = 1;
+    for(int i = 1; i <= n; i++) {
+        f *= i;
+    }
+    return f;
+}
+
+// Función para calcular potencia A^B
+double potencia(double base, int exp) {
+    double p = 1;
+    for(int i = 1; i <= exp; i++) {
+        p *= base;
+    }
+    return p;
+}
+
+// Función para calcular la serie
+double calcularSerie(int A, int N) {
+    double suma = 0;
+    for(int k = 1; k <= N; k++) {
+        int denom = 2 * k; // (2k)!
+        suma += potencia(A, k) / factorial(denom);
+    }
+    return suma;
+}
+
+int main() {
+    int A, N;
+
+    cout << "Ingrese el valor de A (positivo): ";
+    cin >> A;
+
+    cout << "Ingrese el valor de N (entero mayor a 1): ";
+    cin >> N;
+
+    if(A <= 0 || N <= 1) {
+        cout << "Error: A debe ser positivo y N > 1." << endl;
+        return 0;
+    }
+
+    double resultado = calcularSerie(A, N);
+
+    cout << fixed << setprecision(4);
+    cout << "El valor de la serie es: " << resultado << endl;
+
+    return 0;
+}
