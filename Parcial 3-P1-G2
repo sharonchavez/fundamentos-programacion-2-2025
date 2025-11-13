@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+string unidades[] = {"", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"};
+string especiales[] = {"diez","once","doce","trece","catorce","quince","dieciseis","diecisiete","dieciocho","diecinueve"};
+string decenas[] = {"","diez","veinte","treinta","cuarenta","cincuenta","sesenta","setenta","ochenta","noventa"};
+string centenas[] = {"","cien","ciento","doscientos","trescientos","cuatrocientos","quinientos","seiscientos","setecientos","ochocientos","novecientos"};
+
+string convertirNumero(int n) {
+    if(n == 0) return "cero";
+    
+    int c = n / 100;
+    int d = (n / 10) % 10;
+    int u = n % 10;
+    string texto = "";
+
+    if(c > 0) {
+        if(n == 100) return "cien";
+        texto += centenas[c] + " ";
+    }
+
+    if(d == 1) texto += especiales[u];
+    else {
+        texto += decenas[d];
+        if(u > 0 && d > 1) texto += " y ";
+        if(d != 1) texto += unidades[u];
+    }
+    return texto;
+}
+
+int main() {
+    int N;
+    cout << "Ingrese un numero positivo (max 999): ";
+    cin >> N;
+
+    if(N <= 0 || N >= 1000){
+        cout << "ERROR: Debe ingresar un numero entre 1 y 999.\n";
+        return 0;
+    }
+
+    cout << "Literal: " << convertirNumero(N) << endl;
+    return 0;
+}
