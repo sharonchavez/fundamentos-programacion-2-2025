@@ -1,0 +1,59 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Convertir número a literal (0-999)
+string numeroALiteral(int n) {
+    string unidad[] = {"", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"};
+    string decena[] = {"", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"};
+    string especial[] = {"diez", "once", "doce", "trece", "catorce", "quince", "dieciseis", "diecisiete", "dieciocho", "diecinueve"};
+    string centena[] = {"", "cien", "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos"};
+
+    if(n == 0) return "cero";
+
+    int c = n / 100;
+    int d = (n / 10) % 10;
+    int u = n % 10;
+    
+    string texto = "";
+
+    if(c > 0) {
+        if(c == 1 && d == 0 && u == 0)
+            texto += "cien";
+        else
+            texto += centena[c] + " ";
+    }
+
+    if(d == 1)
+        texto += especial[u];
+    else {
+        texto += decena[d];
+        if(u > 0 && d > 1) texto += " y ";
+        if(d != 1) texto += unidad[u];
+    }
+
+    return texto;
+}
+
+int main() {
+    int max, suma = 0;
+
+    cout << "Ingrese un numero limite (max 999): ";
+    cin >> max;
+
+    if(max < 5 || max > 999) {
+        cout << "Valor invalido.";
+        return 0;
+    }
+
+    cout << "\nMultiplos de 5 y su literal:\n";
+
+    for(int i = 5; i <= max; i += 5) {
+        suma += i;
+        cout << i << " -> " << numeroALiteral(i) << endl;
+    }
+
+    cout << "\nSuma total = " << suma << endl;
+
+    return 0;
+}
