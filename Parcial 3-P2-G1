@@ -1,0 +1,68 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+// Calcular salario bruto
+float calcularSalarioBruto(float horas, float pagoHora) {
+    return horas * pagoHora;
+}
+
+// Calcular pago por horas extra (por valor)
+float calcularHorasExtra(float horasExtra, float pagoHora) {
+    float pagoExtra = 0;
+    if(horasExtra > 10) {
+        pagoExtra = horasExtra * (pagoHora * 1.25);
+    }
+    return pagoExtra;
+}
+
+// Aplicar penalización usando REFERENCIA &
+void aplicarPenalizacion(float &salario, int tardanzas) {
+    if(tardanzas > 3) {
+        salario -= salario * 0.05; // descuento 5%
+    }
+}
+
+// Calcular bono (8%)
+float calcularBono(float salarioBruto) {
+    return salarioBruto * 0.08;
+}
+
+int main() {
+    string nombre;
+    float horas, pagoHora, horasExtra;
+    int tardanzas;
+
+    cout << "Nombre del empleado: ";
+    getline(cin, nombre);
+
+    cout << "Horas trabajadas en el mes: ";
+    cin >> horas;
+
+    cout << "Pago por hora (Bs): ";
+    cin >> pagoHora;
+
+    cout << "Numero de dias que llego tarde: ";
+    cin >> tardanzas;
+
+    cout << "Horas extras trabajadas: ";
+    cin >> horasExtra;
+
+    float salarioBruto = calcularSalarioBruto(horas, pagoHora);
+    float pagoExtra = calcularHorasExtra(horasExtra, pagoHora);
+    float bono = calcularBono(salarioBruto);
+
+    aplicarPenalizacion(salarioBruto, tardanzas);
+
+    float salarioNeto = salarioBruto + pagoExtra + bono;
+
+    cout << fixed << setprecision(2);
+    cout << "\n---- RESULTADOS ----\n";
+    cout << "Empleado: " << nombre << endl;
+    cout << "Salario Bruto: " << salarioBruto << " Bs" << endl;
+    cout << "Pago por Horas Extra: " << pagoExtra << " Bs" << endl;
+    cout << "Bono (8%): " << bono << " Bs" << endl;
+    cout << "Salario Neto Final: " << salarioNeto << " Bs" << endl;
+
+    return 0;
+}
