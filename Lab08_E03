@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int pin, copia, digito;
+    int intentos = 0;
+
+    do {
+        cout << "\nIngrese PIN (4 digitos): ";
+        cin >> pin;
+
+        copia = pin;
+        int contador = 0;
+        bool repetido = false;
+        int anterior = -1;
+
+        // Contar dígitos y validar repetidos
+        while (copia > 0) {
+            digito = copia % 10;
+
+            if (digito == anterior) {
+                repetido = true;
+            }
+
+            anterior = digito;
+            copia = copia / 10;
+            contador++;
+        }
+
+        if (contador == 4 && !repetido) {
+            cout << "PIN valido. Acceso concedido.\n";
+            break;
+        } else {
+            cout << "PIN invalido.\n";
+        }
+
+        intentos++;
+
+    } while (intentos < 3);
+
+    if (intentos == 3) {
+        cout << "Cuenta bloqueada.\n";
+    }
+
+    return 0;
+}
